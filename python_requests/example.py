@@ -17,6 +17,9 @@ def get_auth_token(partner_name, api_key):
 
     :param str partner_name: the partner's name for use in the API
     :param str api_key: the partner's API key, for use in the API
+
+    :rtype: str
+    :return: A JWT token
     """
     authorization_raw_key = '{}:{}'.format(partner_name, api_key)
 
@@ -39,6 +42,9 @@ def get_hotel_by_id(hotel_id, partner_name, api_key):
     :param str|None hotel_id: a hotel id to get the details for. If None, will retrieve many hotels
     :param str partner_name: see func::`get_auth_token`
     :param str api_key: see func::`get_auth_token`
+
+    :rtype: requests.Response
+    :return: a response object
     """
     token = get_auth_token(partner_name, api_key)
 
