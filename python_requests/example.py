@@ -8,6 +8,9 @@ import base64
 
 import requests
 
+CONNECT_API_AUTH_ENDPOINT = 'https://analytics.trustyou.com/connect/api/v1.0/auth'
+CONNECT_API_HOTEL_ENDPOINT = 'https://analytics.trustyou.com/connect/api/v1.0/hotels'
+
 
 def get_auth_token(partner_name, api_key):
     """Returns the API authorization token. Use this for subsequent calls.
@@ -23,11 +26,14 @@ def get_auth_token(partner_name, api_key):
     """
     authorization_raw_key = '{}:{}'.format(partner_name, api_key)
 
+    # The ASCII decoding/encoding is specific to python, but might be required in other languages
+    base64_encoded_key = base64.b64encode(authorization_raw_key.encode('ascii')).decode('ascii')
+
     auth_response = requests.post(
-        'https://analytics.trustyou.com/connect/api/v1.0/auth',
+        CONNECT_API_AUTH_ENDPOINT,
         headers={
             'Authorization': 'Basic {}'
-            .format(base64.b64encode(authorization_raw_key.encode('ascii')).decode('ascii')),
+            .format(base64_encoded_key),
             'Content-type': 'application/json',
             'Accept': 'application/json'})
 
@@ -48,7 +54,7 @@ def get_hotel_by_id(hotel_id, partner_name, api_key):
     """
     token = get_auth_token(partner_name, api_key)
 
-    url = 'https://analytics.trustyou.com/connect/api/v1.0/hotels'
+    url = CONNECT_API_HOTEL_ENDPOINT
 
     if hotel_id:
         url += '/{}'.format(hotel_id)
