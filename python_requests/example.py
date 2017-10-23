@@ -8,8 +8,8 @@ import base64
 
 import requests
 
-CONNECT_API_AUTH_ENDPOINT = 'https://analytics.trustyou.com/connect/api/v1.0/auth'
-CONNECT_API_HOTEL_ENDPOINT = 'https://analytics.trustyou.com/connect/api/v1.0/hotels'
+CONNECT_API_AUTH_ENDPOINT = 'https://analytics.staging.trustyou.com/connect/api/v1.0/auth'
+CONNECT_API_HOTEL_ENDPOINT = 'https://analytics.staging.trustyou.com/connect/api/v1.0/hotels'
 
 
 def get_auth_token(partner_name, api_key):
